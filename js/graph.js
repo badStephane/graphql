@@ -19,7 +19,7 @@ export function MAJpage(user) {
     let logout = document.createElement('button')
     logout.id = 'logoutButton';
     logout.className = 'logout';
-    logout.textContent = 'Se déconnecter';
+    logout.textContent = 'LogOut';
     divInfo.appendChild(logout);
 
     let divName = document.createElement('div');

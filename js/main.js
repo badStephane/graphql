@@ -51,7 +51,7 @@ export function home() {
     let buttonConnexion = document.createElement('button');
     buttonConnexion.id = 'buttonConnexion';
     buttonConnexion.className = 'buttonConnexion';
-    buttonConnexion.textContent = 'Se connecter'
+    buttonConnexion.textContent = 'LogIn'
     divConnexion.appendChild(buttonConnexion);
 
     divConnexion.appendChild(formConnexion);
