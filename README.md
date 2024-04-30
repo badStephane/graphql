@@ -8,8 +8,8 @@ Le projet demande la création de <a href="https://developer.mozilla.org/en-US/d
 
 ### Usage
 _______
-Page hébergé via <a href="https://www.netlify.com/" target="blank">Netlify</a><br>
-Lien d'accées : <a href="https://sbadiane-graphql.netlify.app/" target="blank">https://sbadiane-graphql.netlify.app/</a>
+Page hébergé via <a href="https://pages.github.com/" target="blank">Github-pages</a><br>
+Lien d'accées : <a href="https://badstephane.github.io/graphql/" target="blank">https://badstephane.github.io/graphql/</a>
 
 ### Dépendance
 _______
