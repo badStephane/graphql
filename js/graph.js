@@ -163,6 +163,7 @@ export function MAJpage(user) {
     container.appendChild(divgraph);
 
     logout.addEventListener('click', () => {
+        localStorage.removeItem('auth')
         home();
     });
 }

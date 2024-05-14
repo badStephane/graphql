@@ -1,15 +1,46 @@
 import { MAJpage } from './graph.js';
 
-const endpoint = "https://learn.zone01dakar.sn/api/graphql-engine/v1/graphql";
-let headers = {
-    "content-type": "application/json",
-};
-let options = {
-    "method": "POST",
-    "headers": headers,
-};
+const endpoint =  "https://learn.zone01dakar.sn/api/graphql-engine/v1/graphql";
+
+
+
+
+export async function isAuth () {
+    const queryuserInfo = {
+        "query": `
+        {
+            user {
+            lastName
+            firstName
+            email
+            auditRatio
+          }
+        }`
+    };
+    try {
+        const response  = await fetch(endpoint, {
+            method: 'POST',
+            headers:{
+                "content-type": "application/json",
+                "Authorization":    `Bearer ${auth}`
+            },
+            body: JSON.stringify(queryuserInfo),
+        });
+        const info = await responseUserInfo.json();
+        if (!info.data) {
+            return false;
+        }
+        return true
+    } catch(err) {
+        console.log(err);
+        return false;
+    }
+}
+
+
 
 export function home() {
+
     let container = document.getElementById('container');
     while (container.firstChild) {
         container.removeChild(container.firstChild);
@@ -60,9 +91,11 @@ export function home() {
     buttonConnexion.addEventListener('click', connexion)
 }
 
+
+
 home();
 
-function connexion() {
+export function connexion() {
     // Requete connexion :
     // https://learn.zone01dakar.sn/api/auth/signin
     // username:password base64 encoding
@@ -88,7 +121,7 @@ function connexion() {
             return response.json();
         })
         .then(data => {
-            headers.Authorization = 'Bearer ' + data;
+            localStorage.setItem('auth', data);
             fetchData();
         })
         .catch(error => {
@@ -96,10 +129,25 @@ function connexion() {
         });
 }
 
+const auth = localStorage.getItem('auth');
+const options  = {
+    method: 'POST',
+    headers:{
+        "content-type": "application/json",
+        "Authorization":    `Bearer ${auth}`
+    },
+}
+
+if (auth) {
+    fetchData();
+} else {
+    home();
+}
 
 // Requete API :
 // https://learn.zone01dakar.sn/api/graphql-engine/v1/graphql
 async function fetchData() {
+    console.log(auth);
     let user = {};
 
     // requeté d'information sur l'utilisateur (table user)
@@ -114,7 +162,7 @@ async function fetchData() {
           }
         }`
     };
-    options.body = JSON.stringify(queryuserInfo);
+    options.body  = JSON.stringify(queryuserInfo)
     const responseUserInfo = await fetch(endpoint, options);
     const dataUserInfo = await responseUserInfo.json();
     if (dataUserInfo.errors !== undefined) {
@@ -206,5 +254,4 @@ async function fetchData() {
     user.XPup = dataXPup.data.transaction_aggregate.aggregate.sum.amount;
     MAJpage(user);
 }
-
 
