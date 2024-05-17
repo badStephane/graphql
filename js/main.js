@@ -98,12 +98,11 @@ home();
 export function connexion() {
     // Requete connexion :
     // https://learn.zone01dakar.sn/api/auth/signin
-    // username:password base64 encoding
     var dataEncodedStringBtoA = btoa(document.getElementById('inputuser').value + ':' + document.getElementById('inputpassword').value)
     fetch(('https://learn.zone01dakar.sn/api/auth/signin'), {
         method: 'POST',
         headers: {
-            'Authorization': 'Bearer' + dataEncodedStringBtoA
+            'Authorization': 'Bearer ' + dataEncodedStringBtoA
         },
     })
         .then(response => {
@@ -122,12 +121,14 @@ export function connexion() {
         })
         .then(data => {
             localStorage.setItem('auth', data);
-            fetchData();
+            fetchData()
+            window.location.reload();
         })
         .catch(error => {
             console.error('Erreur lors de la récupération des données:', error);
         });
 }
+
 
 const auth = localStorage.getItem('auth');
 const options  = {
